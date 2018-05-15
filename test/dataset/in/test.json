@@ -1,19 +1,19 @@
 [
   {
     "_comment" : " === Notice initiale ===",
-    "titre": {
+    "title": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Guidetti-Gonzalez Simone"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Guidetti-Gonzalez S"
     },
     "doi":{
@@ -43,7 +43,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°5"
     },
     "volume":{
@@ -76,7 +76,7 @@
     "titreSource":{
       "value":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":""
     },
     "typeConditor":[{"type":"Article"}],
@@ -85,20 +85,20 @@
   }
 ,
   {
-    "_comment" : " === Notice 2, sensée matcher avec titre + doi (REGLE 1) ===",
-    "titre": {
+    "_comment" : " === Notice 2, sensée matcher avec title + doi (REGLE 1) ===",
+    "title": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Gonzalez Speedy"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -128,7 +128,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°6"
     },
     "volume":{
@@ -161,7 +161,7 @@
     "titreSource":{
       "value":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":""
     },
     "typeConditor":[{"type":"Article"}],
@@ -170,20 +170,20 @@
   }
 ,
   {
-    "_comment" : " === Notice 3, sensée matcher avec titre+volume+numero+issn (REGLE 2) ===",
-    "titre": {
+    "_comment" : " === Notice 3, sensée matcher avec title+volume+numero+issn (REGLE 2) ===",
+    "title": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Gonzalez Speedy"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -213,7 +213,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°5"
     },
     "volume":{
@@ -247,7 +247,7 @@
       "value":"",
       "normalized":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":"",
       "normalized":""
     },
@@ -258,19 +258,19 @@
 ,
   {
     "_comment" : " === Notice 4, sensée matcher avec DOI seul (REGLE 3) ===",
-    "titre": {
+    "title": {
       "value" : "ProbMetab: an R package for Bayan probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Gonzalez Speedy"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -300,7 +300,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°5"
     },
     "volume":{
@@ -334,7 +334,7 @@
       "value":"",
       "normalized":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":"",
       "normalized":""
     },
@@ -344,20 +344,20 @@
   }
 ,
   {
-    "_comment" : " === Notice 5, sensée matcher avec titre+auteur+issn seul (REGLE 4) ===",
-    "titre": {
+    "_comment" : " === Notice 5, sensée matcher avec title+auteur+issn seul (REGLE 4) ===",
+    "title": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Guidetti-Gonzalez Simone"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -387,7 +387,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°6"
     },
     "volume":{
@@ -421,7 +421,7 @@
       "value":"",
       "normalized":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":"",
       "normalized":""
     },
@@ -431,20 +431,20 @@
   }
 ,
   {
-    "_comment" : " === Notice 6, sensée matcher avec titre+auteurInit+issn seul (REGLE 5) ===",
-    "titre": {
+    "_comment" : " === Notice 6, sensée matcher avec title+auteurInit+issn seul (REGLE 5) ===",
+    "title": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Guidetti-Gonzales Simone"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Guidetti-Gonzalez S"
     },
     "doi":{
@@ -474,7 +474,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°6"
     },
     "volume":{
@@ -507,7 +507,7 @@
     "titreSource":{
       "value":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":""
     },
     "typeConditor":[{"type":"Article"}],
@@ -517,19 +517,19 @@
 ,
   {
     "_comment" : " === Notice 7, sensée ne pas matcher => PAS UN DOUBLON ===",
-    "titre": {
+    "title": {
       "value" : "ProbMetab: an R package for mayan probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Gonzales Simone"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -559,7 +559,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°6"
     },
     "volume":{
@@ -593,7 +593,7 @@
       "value":"",
       "normalized":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":"",
       "normalized":""
     },
@@ -604,19 +604,19 @@
   ,
   {
     "_comment" : " === Notice 8, sensée matcher avec notice 7 et même la remplacer => UN DOUBLON ===",
-    "titre": {
+    "title": {
       "value" : "ProbMetab: an R package for mayan probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titrefr": {
+    "titlefr": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "titreen": {
+    "titleen": {
       "value" : "ProbMetab: an R package for Bayesian probabilistic annotation of LC-MS-based metabolomics"
     },
-    "auteur": {
+    "author": {
       "value" : "Gonzales Simone"
     } ,
-    "auteurInit":{
+    "authorInit":{
       "value": "Gonzalez S"
     },
     "doi":{
@@ -646,7 +646,7 @@
     "isbn":{
       "value":"1367-4803"
     },
-    "numero":{
+    "issue":{
       "value":"n°6"
     },
     "volume":{
@@ -680,7 +680,7 @@
       "value":"",
       "normalized":""
     },
-    "datePubli":{
+    "publicationDate":{
       "value":"",
       "normalized":""
     },
