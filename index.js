@@ -46,7 +46,7 @@ class CoSimilarity{
                 }
               }
             };
-
+      
       return query;
     });
   }
@@ -67,7 +67,7 @@ class CoSimilarity{
 
     let maxScore = result.hits.max_score;
     docObject.maxScore = maxScore
-    let minLimit = maxScore*90/100;
+    let minLimit = maxScore*70/100;
     docObject.minLimit = minLimit;
 
     let recordId;
@@ -76,6 +76,8 @@ class CoSimilarity{
         recordId = hit._id;
       }
     });
+
+    if (recordId===undefined) { throw new Error("la notice ne s'est pas trouvée."); }
 
     let arrayNearDuplicate = _.map(result.hits.hits,(hit)=>{
       if ((hit._score>=minLimit || hit.score>200) && hit._source.idConditor!==docObject.idConditor && _.union(hit._source.typeConditor,docObject.typeConditor).length>0){
@@ -89,6 +91,8 @@ class CoSimilarity{
     arrayNearDuplicate = _.compact(arrayNearDuplicate);
 
     docObject.nearDuplicate = arrayNearDuplicate;
+    docObject.isNearDuplicate = false;
+    if (arrayNearDuplicate.length>0) {docObject.isNearDuplicate = true;}
 
     return esClient.update({
       index:esConf.index,
@@ -96,6 +100,7 @@ class CoSimilarity{
       id:recordId,
       body:{
         doc:{
+          isNearDuplicate:docObject.isNearDuplicate,
           nearDuplicate:arrayNearDuplicate
         }
       }
