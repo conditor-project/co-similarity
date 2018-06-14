@@ -54,7 +54,8 @@ class CoSimilarity{
   getScore(docObject,request){
     let response = esClient.search({
       index:esConf.index,
-      body:request
+      body:request,
+      size:100
     });
     return response;
   }
@@ -66,8 +67,9 @@ class CoSimilarity{
   insertScore(docObject,result){
 
     let maxScore = result.hits.max_score;
+    let total = result.hits.total;
     docObject.maxScore = maxScore
-    let minLimit = maxScore*70/100;
+    let minLimit = maxScore*80/100;
     docObject.minLimit = minLimit;
 
     let recordId;
@@ -80,10 +82,11 @@ class CoSimilarity{
     if (recordId===undefined) { throw new Error("la notice ne s'est pas trouvée."); }
 
     let arrayNearDuplicate = _.map(result.hits.hits,(hit)=>{
-      if ((hit._score>=minLimit || hit.score>200) && hit._source.idConditor!==docObject.idConditor && _.union(hit._source.typeConditor,docObject.typeConditor).length>0){
+      if (hit._score>=minLimit && hit._source.idConditor!==docObject.idConditor  && _.intersection(hit._source.typeConditor,docObject.typeConditor).length>0){
         return {
           score : hit._score,
           idConditor : hit._source.idConditor,
+          type:_.intersection(hit._source.typeConditor,docObject.typeConditor)
         }
       }
     });
@@ -112,6 +115,9 @@ class CoSimilarity{
 
     this.getSimilarity(docObject)
     .then(this.insertScore.bind(this,docObject))
+    .then(()=>{
+      cb();
+    })
     .catch(function(e){
         error = {
             errCode: 3,
@@ -119,10 +125,8 @@ class CoSimilarity{
         };
         docObject.error = error;
         cb(error);
-    })
-    .then(()=>{
-      cb();
-    })
+    });
+    
   }
 
   finalJob(docObject,cb){
