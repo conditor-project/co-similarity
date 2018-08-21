@@ -20,12 +20,16 @@
   },
   "homepage": "https://github.com/conditor-project/co-similarity#readme",
   "dependencies": {
+    "async": "^2.6.1",
     "bluebird": "^3.5.1",
     "chai": "^4.1.2",
     "co-config": "git+https://github.com/conditor-project/co-config.git",
     "debug": "^3.1.0",
+    "elasticdump": "^3.3.19",
     "elasticsearch": "^14.2.0",
     "lodash": "^4.17.5",
-    "mocha": "^5.1.1"
+    "mocha": "^5.1.1",
+    "npm": "^5.10.0",
+    "rewire": "^4.0.1"
   }
 }

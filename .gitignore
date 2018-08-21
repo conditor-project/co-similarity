@@ -1,0 +1,5 @@
+node_modules
+.vscode
+elasticsearch.log
+test/dataset/in/data.json
+test/dataset/in/test.json

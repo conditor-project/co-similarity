@@ -5,7 +5,7 @@ const es = require('elasticsearch'),
       _ = require('lodash'),
       metadata = require('co-config/mapping-shingles.json'),
       baseRequest = require('co-config/base_request.json'),
-      debug = require('debug')('co-deduplicate'),
+      debug = require('debug')('co-similarity'),
       Promise = require('bluebird');
 
 const esClient = new es.Client({
@@ -115,7 +115,7 @@ class CoSimilarity{
 
     this.getSimilarity(docObject)
     .then(this.insertScore.bind(this,docObject))
-    .then(()=>{
+    .then(()=>{      
       cb();
     })
     .catch(function(e){
