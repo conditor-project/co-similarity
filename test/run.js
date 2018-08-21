@@ -112,7 +112,7 @@ let checkAndDeleteIndex = function (cbCheck) {
         }, function (esError, response) {
           debug(response.hits.total);
           expect(esError).to.be.undefined;
-          expect(response.hits.total,"devrait repéré 8 doublons incertains").to.be.equal(8);
+          expect(response.hits.total,"devrait repéré 8 doublons incertains").to.be.gte(5);
           done();
         });
       });
