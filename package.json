@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha",
     "postinstall": "test/bin/unzip-dataset.sh",
-    "install:travis": "npm install && unzip -o -P ${ZIP_PASSWORD} ./test/dataset/in/testdata.zip -d ./test/dataset/in"
+    "install:travis": "unzip -o -P ${ZIP_PASSWORD} ./test/dataset/in/testdata.zip -d ./test/dataset/in && npm install"
   },
   "repository": {
     "type": "git",
