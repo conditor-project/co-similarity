@@ -3,7 +3,7 @@
 const es = require('elasticsearch'),
       esConf = require('co-config/es.js'),
       _ = require('lodash'),
-      metadata = require('co-config/mapping-shingles.json'),
+      metadata = require('co-config/mapping.json'),
       baseRequest = require('co-config/base_request.json'),
       debug = require('debug')('co-similarity'),
       Promise = require('bluebird');
