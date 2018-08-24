@@ -6,7 +6,8 @@ const es = require('elasticsearch'),
       metadata = require('co-config/mapping.json'),
       baseRequest = require('co-config/base_request.json'),
       debug = require('debug')('co-similarity'),
-      Promise = require('bluebird');
+      Promise = require('bluebird'),
+      bulkUpdates = {body:[]};
 
 const esClient = new es.Client({
     host: esConf.host,
@@ -25,18 +26,21 @@ class CoSimilarity{
 
   }
 
+  getShingleString(docObject){
+    let shingleField='';
+    let mapping=_.get(metadata,'mappings.record.properties',{});
+    for (const fieldName of Object.keys(mapping)) {
+      if (mapping[fieldName]['copy_to'] === 'fingerprint' && docObject[fieldName] && docObject[fieldName] !== '')
+        shingleField += ' '+docObject[fieldName];
+    }
+    return shingleField.substring(1);
+  }
+
   getRequest(docObject){
     return Promise.try(()=>{
       let query='';
-      let shingleField='';
-      let mapping=_.get(metadata,'mappings.record.properties',{});
-      _.mapKeys(mapping,(value,key)=>{
-        if (_.get(value,'copy_to','')!=='') {
-          shingleField+=_.get(docObject,key,'');
-          //shingleField+=_.get(docObject,key+'.value','');
-        }
-      });
-
+      const shingleField = this.getShingleString(docObject);
+      
       query={"query":
               {"bool":
                 {"must":
@@ -95,19 +99,11 @@ class CoSimilarity{
 
     docObject.nearDuplicate = arrayNearDuplicate;
     docObject.isNearDuplicate = false;
-    if (arrayNearDuplicate.length>0) {docObject.isNearDuplicate = true;}
+    if (arrayNearDuplicate.length>0) docObject.isNearDuplicate = true;
 
-    return esClient.update({
-      index:esConf.index,
-      type:esConf.type,
-      id:recordId,
-      body:{
-        doc:{
-          isNearDuplicate:docObject.isNearDuplicate,
-          nearDuplicate:arrayNearDuplicate
-        }
-      }
-    });
+    // update of docObjects are stored: bulk will be done by finalJob()
+    bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:recordId}});
+    bulkUpdates.body.push({doc:{isNearDuplicate:docObject.isNearDuplicate,nearDuplicate:arrayNearDuplicate}});
   }
 
   doTheJob(docObject, cb) {
@@ -129,8 +125,18 @@ class CoSimilarity{
     
   }
 
-  finalJob(docObject,cb){
-    cb();
+  finalJob(docObjects,cb){
+    if (bulkUpdates.body.length > 1) {
+      esClient.bulk(bulkUpdates, function(err,resp){
+        if (err) {
+          cb({
+            errCode: 4,
+            errMessage: 'erreur de mise à jour des docObjects avec infos de similarité : ' + err
+          });
+        } else cb();
+      });
+  
+    } else cb();
   }
 }
 

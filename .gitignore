@@ -3,3 +3,4 @@ node_modules
 elasticsearch.log
 test/dataset/in/data.json
 test/dataset/in/test.json
+package-lock.json
