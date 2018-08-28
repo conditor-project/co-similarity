@@ -7,7 +7,9 @@ const es = require('elasticsearch'),
       baseRequest = require('co-config/base_request.json'),
       debug = require('debug')('co-similarity'),
       Promise = require('bluebird'),
-      bulkUpdates = {body:[]};
+      docsToBeUpdated = {},
+      bulkUpdates = {body:[]},
+      idConditorToIdElastic = {};
 
 const esClient = new es.Client({
     host: esConf.host,
@@ -78,6 +80,7 @@ class CoSimilarity{
 
     let recordId;
     _.each(result.hits.hits,(hit)=>{
+      idConditorToIdElastic[hit._source.idConditor] = hit._id;
       if (hit._source.idConditor===docObject.idConditor){
         recordId = hit._id;
       }
@@ -101,9 +104,73 @@ class CoSimilarity{
     docObject.isNearDuplicate = false;
     if (arrayNearDuplicate.length>0) docObject.isNearDuplicate = true;
 
+    /*
+      id1 : [
+        idConditor : id2,
+        score : 0.9,
+        type ...
+      ],
+      id2 : [
+        idConditor : id1
+        duplicateBySymmetry:true,
+        type...
+      ]
+    */
+    for (let nearDuplicate of arrayNearDuplicate) {
+      this.addDuplicate(docObject.idConditor,docObject.typeConditor,nearDuplicate);
+      // console.log(docsToBeUpdated);
+    }
+
+
     // update of docObjects are stored: bulk will be done by finalJob()
-    bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:recordId}});
-    bulkUpdates.body.push({doc:{isNearDuplicate:docObject.isNearDuplicate,nearDuplicate:arrayNearDuplicate}});
+    // bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:recordId}});
+    // bulkUpdates.body.push({doc:{isNearDuplicate:docObject.isNearDuplicate,nearDuplicate:arrayNearDuplicate}});
+  }
+
+  addDuplicate(idSource,typeSource,dup) {
+    // normal link
+    if (!docsToBeUpdated[idSource] ) {
+      docsToBeUpdated[idSource] = [dup];
+    } else {
+      const duplicatesOfSource = docsToBeUpdated[idSource];
+      let alreadyHere = false;
+      let duplicateAlreadyDetected = null;
+      for (let i=0; i<duplicatesOfSource.length; i++) {
+        const d = duplicatesOfSource[i];
+        if (d.idConditor === dup.idConditor) {
+          alreadyHere = true;
+          duplicateAlreadyDetected = d;
+          i=duplicatesOfSource.length;
+        }
+      }
+      if (!alreadyHere) {
+        docsToBeUpdated[idSource].push(dup);
+      } else if (alreadyHere && duplicateAlreadyDetected.duplicateBySymmetry) {
+        delete duplicateAlreadyDetected.duplicateBySymmetry;
+        duplicateAlreadyDetected.score = dup.score;
+        duplicateAlreadyDetected.type = dup.type;
+      }
+    }
+    // symmetric link
+    if (!docsToBeUpdated[dup.idConditor] ) {
+      docsToBeUpdated[dup.idConditor] = [{idConditor:idSource, duplicateBySymmetry:true,type: typeSource}];
+    } else {
+      const duplicatesOfTarget = docsToBeUpdated[dup.idConditor];
+      let alreadyHere = false;
+      let duplicateAlreadyDetected = null;
+      for (let i=0; i<duplicatesOfTarget.length; i++) {
+        const d = duplicatesOfTarget[i];
+        if (d.idConditor === idSource) {
+          alreadyHere = true;
+          duplicateAlreadyDetected = d;
+          i=duplicatesOfTarget.length;
+        }
+      }
+      if (!alreadyHere) {
+        docsToBeUpdated[dup.idConditor].push({idConditor:idSource, duplicateBySymmetry:true,type: typeSource});
+      }
+    }
+
   }
 
   doTheJob(docObject, cb) {
@@ -126,6 +193,14 @@ class CoSimilarity{
   }
 
   finalJob(docObjects,cb){
+    for (let idConditor of Object.keys(docsToBeUpdated)) {
+      if (idConditorToIdElastic[idConditor]) {
+        const nearDuplicates = docsToBeUpdated[idConditor];
+        bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:idConditorToIdElastic[idConditor]}});
+        bulkUpdates.body.push({doc:{isNearDuplicate:true,nearDuplicate:nearDuplicates}});
+      }
+    }
+    // console.log(JSON.stringify(bulkUpdates,null,"  "));
     if (bulkUpdates.body.length > 1) {
       esClient.bulk(bulkUpdates, function(err,resp){
         if (err) {
@@ -135,7 +210,7 @@ class CoSimilarity{
           });
         } else cb();
       });
-  
+      cb();
     } else cb();
   }
 }
