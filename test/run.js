@@ -100,6 +100,7 @@ describe('#Tests co-similarity...', function () {
         debug("doTheJob sur docObject d'idConditor " + docObject.idConditor);
         setTimeout(function () {
           business.doTheJob(docObject, function (err) {
+            if (err) debug(err.errMessage);
             expect(err).to.be.undefined;
             expect('isNearDuplicate' in docObject, 'la clé isNearDuplicate devrait avoir été positionnée').to.be.true;
             expect('nearDuplicate' in docObject, 'la clé nearDuplicate devrait avoir été positionnée').to.be.true;
@@ -111,7 +112,7 @@ describe('#Tests co-similarity...', function () {
       }, function (errEach) {
         debug("dans cb finale")
         expect(errEach).to.be.null;
-          business.finalJob({},function(error){
+          business.finalJob(testData,function(error){
             if (error) console.log(error.errMessage);
             expect(error).to.be.undefined;
             setTimeout(function () {
@@ -130,6 +131,18 @@ describe('#Tests co-similarity...', function () {
         expect(esError).to.be.undefined;
         debug(`${response.hits.total} doublons on été repérés.`);
         expect(response.hits.total, "devrait repérer 6 doublons incertains").to.be.equal(6);
+        done();
+      });
+    });
+
+    it('devrait avoir propagé les doublons incertains (lien bidirectionnel)', function (done) {
+      esClient.search({
+        index: esConf.index,
+        q: "idConditor:OBt1BTy7ko4E62xLqqEZTiou1"
+      }, function (esError, response) {
+        expect(esError).to.be.undefined;
+        //debug(response.hits.hits[0]._source);
+        expect(response.hits.hits[0]._source.isNearDuplicate, "le doc d'idConditor OBt1BTy7ko4E62xLqqEZTiou1 devrait avoir isNearDuplicate=true").to.be.true;
         done();
       });
     });
