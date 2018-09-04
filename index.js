@@ -88,6 +88,7 @@ class CoSimilarity{
 
     if (recordId===undefined) { throw new Error("la notice ne s'est pas trouvée."); }
 
+    // retrieve every duplicate with a score greater than minLimit
     let arrayNearDuplicate = _.map(result.hits.hits,(hit)=>{
       if (hit._score>=minLimit && hit._source.idConditor!==docObject.idConditor  && _.intersection(hit._source.typeConditor,docObject.typeConditor).length>0){
         return {
@@ -103,30 +104,27 @@ class CoSimilarity{
     docObject.nearDuplicate = arrayNearDuplicate;
     docObject.isNearDuplicate = false;
     if (arrayNearDuplicate.length>0) docObject.isNearDuplicate = true;
-
-    /*
-      id1 : [
-        idConditor : id2,
-        score : 0.9,
-        type ...
-      ],
-      id2 : [
-        idConditor : id1
-        duplicateBySymmetry:true,
-        type...
-      ]
-    */
     for (let nearDuplicate of arrayNearDuplicate) {
-      this.addDuplicate(docObject.idConditor,docObject.typeConditor,nearDuplicate);
-      // console.log(docsToBeUpdated);
+      // update of docObjects are stored: bulk will be done by finalJob()
+    this.addDuplicate(docObject.idConditor,docObject.typeConditor,nearDuplicate);
+      debug(docsToBeUpdated);
     }
-
-
-    // update of docObjects are stored: bulk will be done by finalJob()
-    // bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:recordId}});
-    // bulkUpdates.body.push({doc:{isNearDuplicate:docObject.isNearDuplicate,nearDuplicate:arrayNearDuplicate}});
   }
 
+    /*
+    Adding in-memory information about nearDuplicates 
+    Resulting variable docsToBeUpdated will have the following structure :
+    id1 : [
+      {idConditor : id2,
+      score : 0.9,
+      type ...},...
+    ],
+    id2 : [
+      {idConditor : id1
+      duplicateBySymmetry:true,
+      type...},...
+    ]
+  */
   addDuplicate(idSource,typeSource,dup) {
     // normal link
     if (!docsToBeUpdated[idSource] ) {
@@ -135,14 +133,13 @@ class CoSimilarity{
       const duplicatesOfSource = docsToBeUpdated[idSource];
       let alreadyHere = false;
       let duplicateAlreadyDetected = null;
-      for (let i=0; i<duplicatesOfSource.length; i++) {
-        const d = duplicatesOfSource[i];
+      _.each(duplicatesOfSource, (d)=>{
         if (d.idConditor === dup.idConditor) {
           alreadyHere = true;
           duplicateAlreadyDetected = d;
-          i=duplicatesOfSource.length;
+          return false;
         }
-      }
+      });
       if (!alreadyHere) {
         docsToBeUpdated[idSource].push(dup);
       } else if (alreadyHere && duplicateAlreadyDetected.duplicateBySymmetry) {
@@ -157,15 +154,12 @@ class CoSimilarity{
     } else {
       const duplicatesOfTarget = docsToBeUpdated[dup.idConditor];
       let alreadyHere = false;
-      let duplicateAlreadyDetected = null;
-      for (let i=0; i<duplicatesOfTarget.length; i++) {
-        const d = duplicatesOfTarget[i];
+      _.each(duplicatesOfTarget,(d)=>{
         if (d.idConditor === idSource) {
           alreadyHere = true;
-          duplicateAlreadyDetected = d;
-          i=duplicatesOfTarget.length;
+          return false;
         }
-      }
+      });
       if (!alreadyHere) {
         docsToBeUpdated[dup.idConditor].push({idConditor:idSource, duplicateBySymmetry:true,type: typeSource});
       }
@@ -193,6 +187,7 @@ class CoSimilarity{
   }
 
   finalJob(docObjects,cb){
+    // build the bulk array for docsToBeUpdated content, filled by doTheJob calls
     for (let idConditor of Object.keys(docsToBeUpdated)) {
       if (idConditorToIdElastic[idConditor]) {
         const nearDuplicates = docsToBeUpdated[idConditor];
@@ -200,7 +195,7 @@ class CoSimilarity{
         bulkUpdates.body.push({doc:{isNearDuplicate:true,nearDuplicate:nearDuplicates}});
       }
     }
-    // console.log(JSON.stringify(bulkUpdates,null,"  "));
+    // make Elasticsearch execute bulk
     if (bulkUpdates.body.length > 1) {
       esClient.bulk(bulkUpdates, function(err,resp){
         if (err) {
