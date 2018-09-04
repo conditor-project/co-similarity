@@ -130,7 +130,7 @@ describe('#Tests co-similarity...', function () {
         debug(response.hits.total);
         expect(esError).to.be.undefined;
         debug(`${response.hits.total} doublons on été repérés.`);
-        expect(response.hits.total, "devrait repérer 6 doublons incertains").to.be.equal(6);
+        expect(response.hits.total, "devrait repérer 9 doublons incertains").to.be.equal(9);
         done();
       });
     });
