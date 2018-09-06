@@ -131,7 +131,18 @@ describe('#Tests co-similarity...', function () {
         expect(esError).to.be.undefined;
         debug(`${response.hits.total} doublons on été repérés.`);
         expect(response.hits.total, "devrait repérer 9 doublons incertains").to.be.equal(9);
-        done();
+        eachLimit(response.hits.hits,10, function (hit, cbEach) {
+          expect(hit._source.nearDuplicate,"le documont posséder au moins un doublon").to.be.an('array'); 
+          expect(hit._source.nearDuplicate.length,"le documont posséder au moins un doublon").to.be.gte(1); 
+          expect(hit._source.nearDuplicate[0].idConditor.length,"le doublon doit posséder un idConditor").to.be.equal(25); 
+          expect(hit._source.nearDuplicate[0].source.length,"le doublon doit posséder une source").to.be.gte(1); 
+          expect(hit._source.nearDuplicate[0].type.length,"le doublon doit posséder un type").to.be.gte(1); 
+          expect(hit._source.nearDuplicate[0].duplicateBySymmetry || hit.score!==0,"le doublon doit posséder soit un score, soit l'attribut duplicateBySymmetry").to.be.true; 
+          cbEach()
+        },function(errEach) {
+          if (errEach) console.error(errEach);
+          done();
+        });
       });
     });
 
@@ -141,8 +152,10 @@ describe('#Tests co-similarity...', function () {
         q: "idConditor:OBt1BTy7ko4E62xLqqEZTiou1"
       }, function (esError, response) {
         expect(esError).to.be.undefined;
-        //debug(response.hits.hits[0]._source);
         expect(response.hits.hits[0]._source.isNearDuplicate, "le doc d'idConditor OBt1BTy7ko4E62xLqqEZTiou1 devrait avoir isNearDuplicate=true").to.be.true;
+        expect(response.hits.hits[0]._source.nearDuplicate[0].idConditor,"le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR").to.be.equal("Cq0XJKEqo4VbqUwANZisaIhHR")
+        expect(response.hits.hits[0]._source.nearDuplicate[0].source,"la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal").to.be.equal("hal")
+        expect(response.hits.hits[0]._source.nearDuplicate[0].duplicateBySymmetry,"le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement").to.be.equal(true);
         done();
       });
     });

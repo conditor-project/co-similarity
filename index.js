@@ -94,7 +94,8 @@ class CoSimilarity{
         return {
           score : hit._score,
           idConditor : hit._source.idConditor,
-          type:_.intersection(hit._source.typeConditor,docObject.typeConditor)
+          type:_.intersection(hit._source.typeConditor,docObject.typeConditor),
+          source:hit._source.source
         }
       }
     });
@@ -106,7 +107,7 @@ class CoSimilarity{
     if (arrayNearDuplicate.length>0) docObject.isNearDuplicate = true;
     for (let nearDuplicate of arrayNearDuplicate) {
       // update of docObjects are stored: bulk will be done by finalJob()
-    this.addDuplicate(docObject.idConditor,docObject.typeConditor,nearDuplicate);
+    this.addDuplicate(docObject,nearDuplicate);
       debug(docsToBeUpdated);
     }
   }
@@ -125,12 +126,12 @@ class CoSimilarity{
       type...},...
     ]
   */
-  addDuplicate(idSource,typeSource,dup) {
+  addDuplicate(docObject,dup) {
     // normal link
-    if (!docsToBeUpdated[idSource] ) {
-      docsToBeUpdated[idSource] = [dup];
+    if (!docsToBeUpdated[docObject.idConditor] ) {
+      docsToBeUpdated[docObject.idConditor] = [dup];
     } else {
-      const duplicatesOfSource = docsToBeUpdated[idSource];
+      const duplicatesOfSource = docsToBeUpdated[docObject.idConditor];
       let alreadyHere = false;
       let duplicateAlreadyDetected = null;
       _.each(duplicatesOfSource, (d)=>{
@@ -141,7 +142,7 @@ class CoSimilarity{
         }
       });
       if (!alreadyHere) {
-        docsToBeUpdated[idSource].push(dup);
+        docsToBeUpdated[docObject.idConditor].push(dup);
       } else if (alreadyHere && duplicateAlreadyDetected.duplicateBySymmetry) {
         delete duplicateAlreadyDetected.duplicateBySymmetry;
         duplicateAlreadyDetected.score = dup.score;
@@ -150,18 +151,18 @@ class CoSimilarity{
     }
     // symmetric link
     if (!docsToBeUpdated[dup.idConditor] ) {
-      docsToBeUpdated[dup.idConditor] = [{idConditor:idSource, duplicateBySymmetry:true,type: typeSource}];
+      docsToBeUpdated[dup.idConditor] = [{idConditor:docObject.idConditor, duplicateBySymmetry:true,type: docObject.typeConditor,source:docObject.source}];
     } else {
       const duplicatesOfTarget = docsToBeUpdated[dup.idConditor];
       let alreadyHere = false;
       _.each(duplicatesOfTarget,(d)=>{
-        if (d.idConditor === idSource) {
+        if (d.idConditor === docObject.idConditor) {
           alreadyHere = true;
           return false;
         }
       });
       if (!alreadyHere) {
-        docsToBeUpdated[dup.idConditor].push({idConditor:idSource, duplicateBySymmetry:true,type: typeSource});
+        docsToBeUpdated[dup.idConditor].push({idConditor:docObject.idConditor, duplicateBySymmetry:true,type: docObject.typeConditor,source:docObject.source});
       }
     }
 
