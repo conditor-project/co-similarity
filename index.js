@@ -90,11 +90,11 @@ class CoSimilarity{
 
     // retrieve every duplicate with a score greater than minLimit
     let arrayNearDuplicate = _.map(result.hits.hits,(hit)=>{
-      if (hit._score>=minLimit && hit._source.idConditor!==docObject.idConditor  && _.intersection(hit._source.typeConditor,docObject.typeConditor).length>0){
+      if (hit._score>=minLimit && hit._source.idConditor!==docObject.idConditor  && _.includes(hit._source.typeConditor,docObject.typeConditor)){
         return {
           score : hit._score,
           idConditor : hit._source.idConditor,
-          type:_.intersection(hit._source.typeConditor,docObject.typeConditor),
+          type:docObject.typeConditor,
           source:hit._source.source
         }
       }

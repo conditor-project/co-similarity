@@ -23,13 +23,13 @@
   "homepage": "https://github.com/conditor-project/co-similarity#readme",
   "dependencies": {
     "async": "^2.6.1",
-    "bluebird": "^3.5.1",
-    "chai": "^4.1.2",
+    "bluebird": "^3.5.2",
+    "chai": "^4.2.0",
     "co-config": "git+https://github.com/conditor-project/co-config.git#v1.1.0",
-    "debug": "^3.1.0",
-    "elasticdump": "^3.3.19",
+    "debug": "^3.2.6",
+    "elasticdump": "^3.5.0",
     "elasticsearch": "^14.2.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.11",
     "mocha": "^5.1.1",
     "npm": "^5.10.0",
     "rewire": "^4.0.1"
