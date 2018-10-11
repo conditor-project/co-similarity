@@ -25,7 +25,7 @@
     "async": "^2.6.1",
     "bluebird": "^3.5.2",
     "chai": "^4.2.0",
-    "co-config": "git+https://github.com/conditor-project/co-config.git#v1.1.0",
+    "co-config": "git+https://github.com/conditor-project/co-config.git",
     "debug": "^3.2.6",
     "elasticdump": "^3.5.0",
     "elasticsearch": "^14.2.0",
