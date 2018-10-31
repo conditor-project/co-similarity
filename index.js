@@ -9,7 +9,8 @@ const es = require('elasticsearch'),
       Promise = require('bluebird'),
       docsToBeUpdated = {},
       bulkUpdates = {body:[]},
-      idConditorToIdElastic = {};
+      idConditorToIdElastic = {},
+      docObjectsIdsForInitialization = {};
 
 const esClient = new es.Client({
     host: esConf.host,
@@ -83,6 +84,8 @@ class CoSimilarity{
       idConditorToIdElastic[hit._source.idConditor] = hit._id;
       if (hit._source.idConditor===docObject.idConditor){
         recordId = hit._id;
+        if (!docObject.nearDuplicate || (Array.isArray(docObject.nearDuplicate) && docObject.nearDuplicate.length===0))
+          docObjectsIdsForInitialization[docObject.idConditor] = hit._id;
       }
     });
 
@@ -189,6 +192,10 @@ class CoSimilarity{
 
   finalJob(docObjects,cb){
     // build the bulk array for docsToBeUpdated content, filled by doTheJob calls
+    for (let idConditor of Object.keys(docObjectsIdsForInitialization)) {
+      bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:docObjectsIdsForInitialization[idConditor]}});
+      bulkUpdates.body.push({doc:{isNearDuplicate:false,nearDuplicate:[]}});
+    }
     for (let idConditor of Object.keys(docsToBeUpdated)) {
       if (idConditorToIdElastic[idConditor]) {
         const nearDuplicates = docsToBeUpdated[idConditor];

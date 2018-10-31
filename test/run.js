@@ -160,6 +160,25 @@ describe('#Tests co-similarity...', function () {
       });
     });
 
+    it('devrait avoir taggé les documents "non doublons incertains"', function (done) {
+      esClient.search({
+        index: esConf.index,
+        q: "isNearDuplicate:false"
+      }, function (esError, response) {
+        debug(response.hits.total);
+        expect(esError).to.be.undefined;
+        expect(response.hits.total,"Devrait trouver des documents sur la requete isNearDuplicate:false").to.be.equal(7);
+        expect(response.hits.hits[0]._source.isNearDuplicate,"la réponse devrait contenir le champ isNearDuplicate avec la valeur false").to.be.equal(false);
+        expect(response.hits.hits[0]._source.nearDuplicate,"la réponse devrait contenir le champ nearDuplicate de type Array").to.be.an("Array");
+        expect(response.hits.hits[0]._source.nearDuplicate.length,"la réponse devrait contenir le champ nearDuplicate comme un tableau vide").to.be.equal(0);
+        expect(response.hits.hits[6]._source.isNearDuplicate,"la réponse devrait contenir le champ isNearDuplicate avec la valeur false").to.be.equal(false);
+        expect(response.hits.hits[6]._source.nearDuplicate,"la réponse devrait contenir le champ nearDuplicate de type Array").to.be.an("Array");
+        expect(response.hits.hits[6]._source.nearDuplicate.length,"la réponse devrait contenir le champ nearDuplicate comme un tableau vide").to.be.equal(0);
+        done();
+      });
+    });
+
+
   });
 
 });
