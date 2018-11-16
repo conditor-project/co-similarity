@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/run.js",
+    "test": "nyc mocha test/run.js",
     "postinstall": "test/bin/unzip-dataset.sh",
     "install:travis": "unzip -o -P ${ZIP_PASSWORD} ./test/dataset/in/testdata.zip -d ./test/dataset/in && npm install"
   },
@@ -24,14 +24,16 @@
   "dependencies": {
     "async": "^2.6.1",
     "bluebird": "^3.5.2",
-    "chai": "^4.2.0",
-    "co-config": "git+https://github.com/conditor-project/co-config.git",
-    "debug": "^3.2.6",
-    "elasticdump": "^3.5.0",
-    "elasticsearch": "^14.2.0",
+    "co-config": "git+https://github.com/conditor-project/co-config.git#v1.3.1",
+    "debug": "^4.1.0",
+    "elasticdump": "^4.1.1",
+    "elasticsearch": "^15.2.0",
     "lodash": "^4.17.11",
-    "mocha": "^5.1.1",
-    "npm": "^5.10.0",
     "rewire": "^4.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "nyc": "^13.1.0",
+    "mocha": "^5.1.1"
   }
 }
