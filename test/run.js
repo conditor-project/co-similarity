@@ -55,7 +55,7 @@ let checkAndDeleteIndex = function (cbCheck) {
 };
 
 describe('#Tests co-similarity...', function () {
-  this.timeout(5000);
+  this.timeout(20000);
   debug(esConf);
 
   // Méthde d'initialisation s'exécutant en tout premier
