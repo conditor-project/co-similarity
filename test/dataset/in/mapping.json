@@ -575,7 +575,7 @@
               "duplicateBySymmetry": {
                 "type": "boolean"
               },
-              "score": {
+              "similarityRate": {
                 "type": "float"
               },
               "source": {

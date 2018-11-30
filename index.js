@@ -72,12 +72,9 @@ class CoSimilarity{
   }
 
   insertScore(docObject,result){
-
-    let maxScore = result.hits.max_score;
-    let total = result.hits.total;
-    docObject.maxScore = maxScore
-    let minLimit = maxScore*80/100;
-    docObject.minLimit = minLimit;
+    const threshold = 80 / 100;
+    docObject.maxScore = result.hits.max_score;
+    docObject.minLimit = docObject.maxScore * threshold;
 
     let recordId;
     _.each(result.hits.hits,(hit)=>{
@@ -92,13 +89,14 @@ class CoSimilarity{
     if (recordId===undefined) { throw new Error("la notice ne s'est pas trouvée."); }
 
     // retrieve every duplicate with a score greater than minLimit
-    let arrayNearDuplicate = _.map(result.hits.hits,(hit)=>{
-      if (hit._score>=minLimit && hit._source.idConditor!==docObject.idConditor  && _.includes(hit._source.typeConditor,docObject.typeConditor)){
+    let arrayNearDuplicate = _.map(result.hits.hits,(hit) => {
+      const similarityRate = (docObject.maxScore === 0) ? 0 : _.round(hit._score / docObject.maxScore, 4);
+      if (similarityRate >= threshold && hit._source.idConditor !== docObject.idConditor  && _.includes(hit._source.typeConditor, docObject.typeConditor)){
         return {
-          score : hit._score,
-          idConditor : hit._source.idConditor,
-          type:docObject.typeConditor,
-          source:hit._source.source
+          similarityRate,
+          idConditor: hit._source.idConditor,
+          type: docObject.typeConditor,
+          source: hit._source.source
         }
       }
     });
