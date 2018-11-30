@@ -90,7 +90,7 @@ class CoSimilarity{
 
     // retrieve every duplicate with a score greater than minLimit
     let arrayNearDuplicate = _.map(result.hits.hits,(hit) => {
-      const similarityRate = _.round(hit._score / docObject.maxScore, 4);
+      const similarityRate = (docObject.maxScore === 0) ? 0 : _.round(hit._score / docObject.maxScore, 4);
       if (similarityRate >= threshold && hit._source.idConditor !== docObject.idConditor  && _.includes(hit._source.typeConditor, docObject.typeConditor)){
         return {
           similarityRate,
