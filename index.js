@@ -35,6 +35,13 @@ class CoSimilarity{
     for (const fieldName of Object.keys(mapping)) {
       if (mapping[fieldName]['copy_to'] === 'fingerprint' && docObject[fieldName] && docObject[fieldName] !== '')
         shingleField += ' '+docObject[fieldName];
+      // Need to be refactored to be generic and search anywhere in mapping tree
+      if (mapping[fieldName].properties) {
+        for (const subFieldName of Object.keys(mapping[fieldName].properties)) {
+          if (mapping[fieldName].properties[subFieldName]['copy_to'] === 'fingerprint' && docObject[fieldName][subFieldName] && docObject[fieldName][subFieldName] !== '')
+            shingleField += ' '+docObject[fieldName][subFieldName];
+        }
+      }
     }
     return shingleField.substring(1);
   }

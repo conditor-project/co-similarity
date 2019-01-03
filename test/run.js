@@ -150,7 +150,7 @@ describe('#Tests co-similarity...', function () {
         q: 'isNearDuplicate:false'
       }).then(response => {
         debug(response.hits.total);
-        expect(response.hits.total, 'Devrait trouver des documents sur la requete isNearDuplicate:false').to.be.equal(7);
+        expect(response.hits.total, 'Devrait trouver des documents sur la requete isNearDuplicate:false').to.be.equal(9);
         response.hits.hits.map(hit => {
           expect(hit._source.isNearDuplicate, 'la réponse devrait contenir le champ isNearDuplicate avec la valeur false').to.be.equal(false);
           expect(hit._source.nearDuplicate, 'la réponse devrait contenir le champ nearDuplicate de type Array').to.be.an('Array');
@@ -162,4 +162,20 @@ describe('#Tests co-similarity...', function () {
       });
     });
   });
+
+//   it('devrait avoir propagé les doublons incertains (lien bidirectionnel) - symmetry', function () {
+//     return esClient.search({
+//       index: esConf.index,
+//       q: 'idConditor:my1z9a22ccF6JDuAiboDpeJ2A OR idConditor:SA9nsgVxlO2qsCvkmFRGhtZal OR idConditor:L5xHWAJRfLKjLfkeABcDZWhsX'
+//     }).then(response => {
+//       response.hits.hits.map(hit => {
+//         expect(hit._source.isNearDuplicate, "le doc d'idConditor OBt1BTy7ko4E62xLqqEZTiou1 devrait avoir isNearDuplicate=true").to.be.true;
+//         hit._source.nearDuplicate.map(nearDuplicate => {
+//           expect(nearDuplicate.idConditor, 'le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR').to.be.equal('Cq0XJKEqo4VbqUwANZisaIhHR');
+//           expect(nearDuplicate.source, 'la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal').to.be.equal('hal');
+//           expect(nearDuplicate.duplicateBySymmetry, 'le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement').to.be.equal(true);
+//         })
+//       })
+//     });
+//   });
 });
