@@ -15,7 +15,7 @@ Concrètement, l'algorithme utilisé est le suivant :
    2. on considère comme doublons incertains tous les résultats dont le score dépasse un certain seuil (80% du score max.)
 4. le docObject est ensuite mis à jour dans Elasticsearch, avec l'ajout des champs `isNearDuplicate` et `nearDuplicate`.
 
-<u>Note</u> : Contrairement au module [co-deduplicate](https://github.com/conditor-project/co-deduplicate), qui détecte des doublons "certains" (fiables à 100%), les doublons repérés par `co-similarity` sont considérés comme "incertains" ("near duplicates" en anglais) et doivent être validés par un être humain.
+_Note_ : Contrairement au module [co-deduplicate](https://github.com/conditor-project/co-deduplicate), qui détecte des doublons "certains" (fiables à 100%), les doublons repérés par `co-similarity` sont considérés comme "incertains" ("near duplicates" en anglais) et doivent être validés par un être humain.
 
 ## Prérequis
 
