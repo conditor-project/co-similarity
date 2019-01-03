@@ -11,7 +11,7 @@
           "idConditor": {
             "type": "keyword"
           },
-          "ingestId": {
+          "sessionName": {
             "type": "keyword"
           },
           "ingestBaseName": {
@@ -24,17 +24,17 @@
           "teiBlob": {
             "type": "binary"
           },
-          "author": {
+          "first3AuthorNames": {
             "type": "text",
             "fields": {
               "normalized": {
                 "type": "keyword",
                 "normalizer": "author:normalizer"
-              }
-            },
+                }
+              },
             "copy_to": "fingerprint"
           },
-          "authorInit": {
+          "first3AuthorNamesWithInitials": {
             "type": "text",
             "fields": {
               "normalized": {
@@ -43,10 +43,10 @@
               }
             }
           },
-          "authorFull": {
+          "authorNames": {
             "type": "text"
           },
-          "authorRef": {
+          "authors": {
             "type": "nested",
             "properties": {
               "surname": {
@@ -67,7 +67,7 @@
                   "ref": {
                     "type": "keyword"
                   },
-                  "adresse": {
+                  "address": {
                     "type": "keyword"
                   }
                 }
@@ -170,7 +170,7 @@
               }
             }
           },
-          "ut": {
+          "utKey": {
             "type": "text",
             "fields": {
               "normalized": {
@@ -228,7 +228,7 @@
               }
             }
           },
-          "articleNo": {
+          "articleNumber": {
             "type": "text",
             "fields": {
               "normalized": {
@@ -310,8 +310,8 @@
             }
           },
           "oatao": {
-            "type": "text",
-            "fields": {
+          "type": "text",
+          "fields": {
               "normalized": {
                 "type": "keyword",
                 "normalizer": "id:normalizer"
@@ -336,7 +336,7 @@
               }
             }
           },
-          "pubmedCentral": {
+          "pmc": {
             "type": "text",
             "fields": {
               "normalized": {
@@ -390,16 +390,16 @@
               }
             }
           },
-          "meetAbstrNo": {
+          "meetingAbstractNumber": {
             "type": "text",
             "fields": {
               "normalized": {
                 "type": "keyword",
-                "normalizer": "id:normalizer"
-              }
+                "normalizer": "id:normalizer" 
+            }
             }
           },
-          "page": {
+          "pageRange": {
             "type": "text",
             "fields": {
               "normalized": {
@@ -412,56 +412,69 @@
             "type": "keyword"
           },
           "title": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
-              },
-              "normalized50": {
+            "dynamic": "false",
+            "properties": {
+              "default": {
                 "type": "text",
-                "analyzer": "analyzer:trunc50"
-              }
-            },
-            "copy_to": "fingerprint"
-          },
-          "titlefr": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer"
+                  }
+                },
+                "copy_to": "fingerprint"
               },
-              "normalized50": {
+              "fr": {
                 "type": "text",
-                "analyzer": "analyzer:trunc50"
-              }
-            },
-            "copy_to": "fingerprint"
-          },
-          "titleen": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer"
+                  }
+                },
+                "copy_to": "fingerprint"
               },
-              "normalized50": {
+              "en": {
                 "type": "text",
-                "analyzer": "analyzer:trunc50"
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer"
+                  }
+                },
+                "copy_to": "fingerprint"
+              },
+              "meeting": {
+                "type": "text",
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer" 
+                }
+                },
+                "copy_to": "fingerprint"
+              },
+              "monography": {
+                "type": "text",
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer"
+                  }
+                },
+                "copy_to": "fingerprint"
+              },
+              "journal": {
+                "type": "text",
+                "fields": {
+                  "normalized": {
+                    "type": "keyword",
+                    "normalizer": "title:normalizer"
+                  }
+                },
+                "copy_to": "fingerprint"
               }
-            },
-            "copy_to": "fingerprint"
-          },
-          "meetingTitle": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
-              }
-            },
-            "copy_to": "fingerprint"
+            }
           },
           "volume": {
             "type": "text",
@@ -481,7 +494,16 @@
               }
             }
           },
-          "typeDocument": {
+          "supplement": {
+            "type": "text",
+            "fields": {
+              "normalized": {
+                "type": "keyword",
+                "normalizer": "volpage:normalizer"
+              }
+            }
+          },
+          "documentType": {
             "type": "keyword"
           },
           "typeConditor": {
@@ -499,7 +521,7 @@
           "isDeduplicable": {
             "type": "boolean"
           },
-          "hadTransDuplicate": {
+          "hasTransDuplicate": {
             "type": "boolean"
           },
           "duplicate": {
@@ -511,7 +533,7 @@
               "rules": {
                 "type": "text"
               },
-              "ingestId": {
+              "sessionName": {
                 "type": "keyword"
               },
               "source": {
@@ -527,26 +549,6 @@
           },
           "idChain": {
             "type": "keyword"
-          },
-          "titreSourceM": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
-              }
-            },
-            "copy_to": "fingerprint"
-          },
-          "titreSourceJ": {
-            "type": "text",
-            "fields": {
-              "normalized": {
-                "type": "keyword",
-                "normalizer": "title:normalizer"
-              }
-            },
-            "copy_to": "fingerprint"
           },
           "abstract": {
             "type": "text",
@@ -575,7 +577,7 @@
               "duplicateBySymmetry": {
                 "type": "boolean"
               },
-              "similarityRate": {
+              "score": {
                 "type": "float"
               },
               "source": {
@@ -598,3 +600,6 @@
     }
   }
 }
+
+
+    
