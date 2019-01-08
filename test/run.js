@@ -91,8 +91,8 @@ describe('#Tests co-similarity...', function () {
           business.doTheJob(docObject, function (error) {
             if (error) return reject(error);
             expect('isNearDuplicate' in docObject, 'la clé isNearDuplicate devrait avoir été positionnée').to.be.true;
-            expect('nearDuplicate' in docObject, 'la clé nearDuplicate devrait avoir été positionnée').to.be.true;
-            expect(Array.isArray(docObject.nearDuplicate), 'la clé nearDuplicate devrait être un tableau').to.be.true;
+            expect('nearDuplicates' in docObject, 'la clé nearDuplicates devrait avoir été positionnée').to.be.true;
+            expect(Array.isArray(docObject.nearDuplicates), 'la clé nearDuplicates devrait être un tableau').to.be.true;
             debug('fin doTheJob sur ' + docObject.idConditor);
             resolve();
           });
@@ -116,13 +116,13 @@ describe('#Tests co-similarity...', function () {
         debug(`${response.hits.total} doublons ont été repérés.`);
         expect(response.hits.total, 'devrait repérer 9 doublons incertains').to.be.equal(9);
         response.hits.hits.map(hit => {
-          expect(hit._source.nearDuplicate, 'le document posséder au moins un doublon').to.be.an('array');
-          expect(hit._source.nearDuplicate.length, 'le document posséder au moins un doublon').to.be.gte(1);
-          hit._source.nearDuplicate.map(nearDuplicate => {
-            expect(nearDuplicate.idConditor.length, 'le doublon doit posséder un idConditor').to.be.equal(25);
-            expect(nearDuplicate.source.length, 'le doublon doit posséder une source').to.be.gte(1);
-            expect(nearDuplicate.type.length, 'le doublon doit posséder un type').to.be.gte(1);
-            expect(nearDuplicate.duplicateBySymmetry || hit.score !== 0, "le doublon doit posséder soit un score, soit l'attribut duplicateBySymmetry").to.be.true;
+          expect(hit._source.nearDuplicates, 'le document posséder au moins un doublon').to.be.an('array');
+          expect(hit._source.nearDuplicates.length, 'le document posséder au moins un doublon').to.be.gte(1);
+          hit._source.nearDuplicates.map(nearDuplicates => {
+            expect(nearDuplicates.idConditor.length, 'le doublon doit posséder un idConditor').to.be.equal(25);
+            expect(nearDuplicates.source.length, 'le doublon doit posséder une source').to.be.gte(1);
+            expect(nearDuplicates.type.length, 'le doublon doit posséder un type').to.be.gte(1);
+            expect(nearDuplicates.duplicateBySymmetry || hit.score !== 0, "le doublon doit posséder soit un score, soit l'attribut duplicateBySymmetry").to.be.true;
           });
         });
       });
@@ -135,10 +135,10 @@ describe('#Tests co-similarity...', function () {
       }).then(response => {
         response.hits.hits.map(hit => {
           expect(hit._source.isNearDuplicate, "le doc d'idConditor OBt1BTy7ko4E62xLqqEZTiou1 devrait avoir isNearDuplicate=true").to.be.true;
-          hit._source.nearDuplicate.map(nearDuplicate => {
-            expect(nearDuplicate.idConditor, 'le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR').to.be.equal('Cq0XJKEqo4VbqUwANZisaIhHR');
-            expect(nearDuplicate.source, 'la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal').to.be.equal('hal');
-            expect(nearDuplicate.duplicateBySymmetry, 'le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement').to.be.equal(true);
+          hit._source.nearDuplicates.map(nearDuplicates => {
+            expect(nearDuplicates.idConditor, 'le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR').to.be.equal('Cq0XJKEqo4VbqUwANZisaIhHR');
+            expect(nearDuplicates.source, 'la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal').to.be.equal('hal');
+            expect(nearDuplicates.duplicateBySymmetry, 'le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement').to.be.equal(true);
           })
         })
       });
@@ -153,11 +153,11 @@ describe('#Tests co-similarity...', function () {
         expect(response.hits.total, 'Devrait trouver des documents sur la requete isNearDuplicate:false').to.be.equal(9);
         response.hits.hits.map(hit => {
           expect(hit._source.isNearDuplicate, 'la réponse devrait contenir le champ isNearDuplicate avec la valeur false').to.be.equal(false);
-          expect(hit._source.nearDuplicate, 'la réponse devrait contenir le champ nearDuplicate de type Array').to.be.an('Array');
-          expect(hit._source.nearDuplicate.length, 'la réponse devrait contenir le champ nearDuplicate comme un tableau vide').to.be.equal(0);
+          expect(hit._source.nearDuplicates, 'la réponse devrait contenir le champ nearDuplicates de type Array').to.be.an('Array');
+          expect(hit._source.nearDuplicates.length, 'la réponse devrait contenir le champ nearDuplicates comme un tableau vide').to.be.equal(0);
           expect(hit._source.isNearDuplicate, 'la réponse devrait contenir le champ isNearDuplicate avec la valeur false').to.be.equal(false);
-          expect(hit._source.nearDuplicate, 'la réponse devrait contenir le champ nearDuplicate de type Array').to.be.an('Array');
-          expect(hit._source.nearDuplicate.length, 'la réponse devrait contenir le champ nearDuplicate comme un tableau vide').to.be.equal(0);
+          expect(hit._source.nearDuplicates, 'la réponse devrait contenir le champ nearDuplicates de type Array').to.be.an('Array');
+          expect(hit._source.nearDuplicates.length, 'la réponse devrait contenir le champ nearDuplicates comme un tableau vide').to.be.equal(0);
         })
       });
     });
@@ -170,10 +170,10 @@ describe('#Tests co-similarity...', function () {
 //     }).then(response => {
 //       response.hits.hits.map(hit => {
 //         expect(hit._source.isNearDuplicate, "le doc d'idConditor OBt1BTy7ko4E62xLqqEZTiou1 devrait avoir isNearDuplicate=true").to.be.true;
-//         hit._source.nearDuplicate.map(nearDuplicate => {
-//           expect(nearDuplicate.idConditor, 'le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR').to.be.equal('Cq0XJKEqo4VbqUwANZisaIhHR');
-//           expect(nearDuplicate.source, 'la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal').to.be.equal('hal');
-//           expect(nearDuplicate.duplicateBySymmetry, 'le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement').to.be.equal(true);
+//         hit._source.nearDuplicates.map(nearDuplicates => {
+//           expect(nearDuplicates.idConditor, 'le doublon incertain de OBt1BTy7ko4E62xLqqEZTiou1 devrait être Cq0XJKEqo4VbqUwANZisaIhHR').to.be.equal('Cq0XJKEqo4VbqUwANZisaIhHR');
+//           expect(nearDuplicates.source, 'la source de Cq0XJKEqo4VbqUwANZisaIhHR devrait être hal').to.be.equal('hal');
+//           expect(nearDuplicates.duplicateBySymmetry, 'le doc Cq0XJKEqo4VbqUwANZisaIhHR est doublon par symétrie uniquement').to.be.equal(true);
 //         })
 //       })
 //     });

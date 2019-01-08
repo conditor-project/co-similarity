@@ -88,14 +88,14 @@ class CoSimilarity{
       idConditorToIdElastic[hit._source.idConditor] = hit._id;
       if (hit._source.idConditor===docObject.idConditor){
         recordId = hit._id;
-        if (!docObject.nearDuplicate || (Array.isArray(docObject.nearDuplicate) && docObject.nearDuplicate.length===0))
+        if (!docObject.nearDuplicates || (Array.isArray(docObject.nearDuplicates) && docObject.nearDuplicates.length===0))
           docObjectsIdsForInitialization[docObject.idConditor] = hit._id;
       }
     });
 
     if (recordId===undefined) { throw new Error("la notice ne s'est pas trouvée."); }
 
-    // retrieve every duplicate with a score greater than minLimit
+    // retrieve every duplicates with a score greater than minLimit
     let arrayNearDuplicate = _.map(result.hits.hits,(hit) => {
       const similarityRate = (docObject.maxScore === 0) ? 0 : _.round(hit._score / docObject.maxScore, 4);
       if (similarityRate >= threshold && hit._source.idConditor !== docObject.idConditor  && _.includes(hit._source.typeConditor, docObject.typeConditor)){
@@ -110,12 +110,12 @@ class CoSimilarity{
 
     arrayNearDuplicate = _.compact(arrayNearDuplicate);
 
-    docObject.nearDuplicate = arrayNearDuplicate;
+    docObject.nearDuplicates = arrayNearDuplicate;
     docObject.isNearDuplicate = false;
     if (arrayNearDuplicate.length>0) docObject.isNearDuplicate = true;
-    for (let nearDuplicate of arrayNearDuplicate) {
+    for (let nearDuplicates of arrayNearDuplicate) {
       // update of docObjects are stored: bulk will be done by finalJob()
-    this.addDuplicate(docObject,nearDuplicate);
+    this.addDuplicate(docObject,nearDuplicates);
       debug(docsToBeUpdated);
     }
   }
@@ -199,13 +199,13 @@ class CoSimilarity{
     // build the bulk array for docsToBeUpdated content, filled by doTheJob calls
     for (let idConditor of Object.keys(docObjectsIdsForInitialization)) {
       bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:docObjectsIdsForInitialization[idConditor]}});
-      bulkUpdates.body.push({doc:{isNearDuplicate:false,nearDuplicate:[]}});
+      bulkUpdates.body.push({doc:{isNearDuplicate:false,nearDuplicates:[]}});
     }
     for (let idConditor of Object.keys(docsToBeUpdated)) {
       if (idConditorToIdElastic[idConditor]) {
         const nearDuplicates = docsToBeUpdated[idConditor];
         bulkUpdates.body.push({update:{_index:esConf.index,_type:esConf.type,_id:idConditorToIdElastic[idConditor]}});
-        bulkUpdates.body.push({doc:{isNearDuplicate:true,nearDuplicate:nearDuplicates}});
+        bulkUpdates.body.push({doc:{isNearDuplicate:true,nearDuplicates:nearDuplicates}});
       }
     }
     // make Elasticsearch execute bulk

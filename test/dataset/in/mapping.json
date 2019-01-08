@@ -105,7 +105,7 @@
               }
             }
           },
-          "duplicate": {
+          "duplicates": {
             "type": "nested",
             "properties": {
               "idConditor": {
@@ -315,7 +315,7 @@
               }
             }
           },
-          "nearDuplicate": {
+          "nearDuplicates": {
             "type": "nested",
             "properties": {
               "duplicateBySymmetry": {
