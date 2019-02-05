@@ -125,7 +125,7 @@ class CoSimilarity{
     Resulting variable docsToBeUpdated will have the following structure :
     id1 : [
       {idConditor : id2,
-      score : 0.9,
+      similarityRate : 0.9,
       type ...},...
     ],
     id2 : [
@@ -153,7 +153,7 @@ class CoSimilarity{
         docsToBeUpdated[docObject.idConditor].push(dup);
       } else if (alreadyHere && duplicateAlreadyDetected.duplicateBySymmetry) {
         delete duplicateAlreadyDetected.duplicateBySymmetry;
-        duplicateAlreadyDetected.score = dup.score;
+        duplicateAlreadyDetected.similarityRate = dup.similarityRate;
         duplicateAlreadyDetected.type = dup.type;
       }
     }

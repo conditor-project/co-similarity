@@ -32,13 +32,14 @@
             "type": "text"
           },
           "authors": {
+            "dynamic": "false",
             "type": "nested",
             "properties": {
               "affiliations": {
                 "type": "nested",
                 "properties": {
                   "address": {
-                    "type": "keyword"
+                    "type": "text"
                   },
                   "ref": {
                     "type": "keyword"
@@ -46,7 +47,12 @@
                 }
               },
               "forename": {
-                "type": "keyword"
+                "type":"text",
+                  "fields":{
+                    "normalized":{
+                      "type":"keyword"
+                    }
+                  }
               },
               "halAuthorId": {
                 "type": "keyword"
@@ -64,7 +70,12 @@
                 "type": "keyword"
               },
               "surname": {
-                "type": "keyword"
+                "type":"text",
+                  "fields":{
+                    "normalized":{
+                      "type":"keyword"
+                    }
+                  }
               },
               "viaf": {
                 "type": "keyword"
@@ -324,7 +335,7 @@
               "idConditor": {
                 "type": "keyword"
               },
-              "score": {
+              "similarityRate": {
                 "type": "float"
               },
               "source": {
