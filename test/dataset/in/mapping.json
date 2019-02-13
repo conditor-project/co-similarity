@@ -57,6 +57,9 @@
               "halAuthorId": {
                 "type": "keyword"
               },
+              "idHal": {
+                "type": "keyword"
+              },
               "idRef": {
                 "type": "keyword"
               },
@@ -207,6 +210,15 @@
             "type": "nested"
           },
           "idHal": {
+            "type": "text",
+            "fields": {
+              "normalized": {
+                "type": "keyword",
+                "normalizer": "id:normalizer"
+              }
+            }
+          },
+          "halId": {
             "type": "text",
             "fields": {
               "normalized": {
