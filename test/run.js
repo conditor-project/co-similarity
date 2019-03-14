@@ -10,7 +10,6 @@ const chai = require('chai');
 const expect = chai.expect;
 const es = require('elasticsearch');
 const spawnSync = require('child_process').spawnSync;
-const eachLimit = require('async/eachLimit');
 const debug = require('debug')('test');
 
 const esConf = require('co-config/es.js');
