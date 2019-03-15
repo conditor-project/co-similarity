@@ -19,14 +19,6 @@ const elasticsearchClient = new elasticsearch.Client({
 });
 
 describe(`${pkg.name}/index.js`, function () {
-  describe('getShingleString()', function () {
-    it('should return a shingle string', function () {
-      const shingleString = coSimilarity.__get__('getShingleString')(testData[0]);
-      expect(shingleString).to.be.a('string');
-      expect(shingleString).to.equal("COMMENGES Hadrien PISTRE Pierre Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie M@ppemonde Longitudinal data are an important part of statistics in the social sciences. Demography has developed specific graphic visualization for these date but their use remains residual for the analysis of spatial dynamics. After a review of these graphic displays using a toy dataset, the paper proposes an original mode of visualization called 'slide plot' conceived to study trajectories of individuals or spatial units. Its use is illustrated with three examples: residential mobility, changes of modal choice in transportation, dynamics of spatial mismatch.")
-    });
-  });
-
   describe('DoTheJob()', function () {
     this.timeout(10000);
     before(function () {
@@ -45,14 +37,54 @@ describe(`${pkg.name}/index.js`, function () {
       });
     });
 
-    it('should do the job', function () {
-      return Promise.mapSeries(testData, data => {
-        return new Promise((resolve, reject) => {
-          coSimilarity.doTheJob(data, (error) => {
-            if (error) return reject(error);
-            resolve();
-          });
+    it('should find some nearDuplicates', function () {
+      const docObjectWhitNearDuplicates = testData[0];
+      return new Promise((resolve, reject) => {
+        coSimilarity.doTheJob(docObjectWhitNearDuplicates, (error) => {
+          if (error) return reject(error);
+          resolve();
         });
+      }).then(() => {
+        return elasticsearchClient.get({
+          index: elasticsearchConf.index,
+          type: Object.keys(mapping.mappings).pop(),
+          id: docObjectWhitNearDuplicates.idConditor
+        });
+      }).then(result => {
+        const doc = result._source;
+        expect(doc).to.have.property('nearDuplicates');
+        expect(doc.nearDuplicates).to.be.an('array');
+        expect(doc.nearDuplicates).to.have.lengthOf(1);
+        const nearDuplicate = doc.nearDuplicates.pop();
+        expect(nearDuplicate).to.have.property('similarityRate');
+        expect(nearDuplicate.similarityRate).to.equal(1);
+        expect(nearDuplicate).to.have.property('source');
+        expect(nearDuplicate.source).to.equal('hal');
+        expect(nearDuplicate).to.have.property('type');
+        expect(nearDuplicate.type).to.equal('Article');
+        expect(nearDuplicate).to.have.property('idConditor');
+        expect(nearDuplicate.idConditor).to.equal('HXHT4r9y_THTaXSKdIb7NKBIO');
+      });
+    });
+
+    it('should find no nearDuplicates', function () {
+      const docObjectWhithoutNearDuplicates = testData[1];
+      return new Promise((resolve, reject) => {
+        coSimilarity.doTheJob(docObjectWhithoutNearDuplicates, (error) => {
+          if (error) return reject(error);
+          resolve();
+        });
+      }).then(() => {
+        return elasticsearchClient.get({
+          index: elasticsearchConf.index,
+          type: Object.keys(mapping.mappings).pop(),
+          id: docObjectWhithoutNearDuplicates.idConditor
+        });
+      }).then(result => {
+        const doc = result._source;
+        expect(doc).to.have.property('nearDuplicates');
+        expect(doc.nearDuplicates).to.be.an('array');
+        expect(doc.nearDuplicates).to.be.empty;
       });
     });
 
@@ -60,6 +92,14 @@ describe(`${pkg.name}/index.js`, function () {
       return elasticsearchClient.indices.delete({
         index: elasticsearchConf.index
       });
+    });
+  });
+
+  describe('getShingleString()', function () {
+    it('should return a shingle string', function () {
+      const shingleString = coSimilarity.__get__('getShingleString')(testData[0]);
+      expect(shingleString).to.be.a('string');
+      expect(shingleString).to.equal("COMMENGES Hadrien PISTRE Pierre Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie M@ppemonde Longitudinal data are an important part of statistics in the social sciences. Demography has developed specific graphic visualization for these date but their use remains residual for the analysis of spatial dynamics. After a review of these graphic displays using a toy dataset, the paper proposes an original mode of visualization called 'slide plot' conceived to study trajectories of individuals or spatial units. Its use is illustrated with three examples: residential mobility, changes of modal choice in transportation, dynamics of spatial mismatch.")
     });
   });
 });
