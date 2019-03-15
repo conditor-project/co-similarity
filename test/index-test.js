@@ -37,7 +37,7 @@ describe(`${pkg.name}/index.js`, function () {
         return Promise.map(testData, data => {
           return elasticsearchClient.create({
             index: elasticsearchConf.index,
-            type: 'record',
+            type: Object.keys(mapping.mappings).pop(),
             id: data.idConditor,
             body: data
           });
@@ -45,10 +45,14 @@ describe(`${pkg.name}/index.js`, function () {
       });
     });
 
-    it('should do the job', function (done) {
-      coSimilarity.doTheJob(testData[0], (error) => {
-        if (error) return done(error);
-        done();
+    it('should do the job', function () {
+      return Promise.mapSeries(testData, data => {
+        return new Promise((resolve, reject) => {
+          coSimilarity.doTheJob(data, (error) => {
+            if (error) return reject(error);
+            resolve();
+          });
+        });
       });
     });
 
