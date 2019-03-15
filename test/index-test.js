@@ -5,7 +5,7 @@
 const pkg = require('../package.json');
 const rewire = require('rewire');
 const Promise = require('bluebird');
-const coSimilarity = rewire('../index-new');
+const coSimilarity = rewire('../index');
 const elasticsearch = require('elasticsearch');
 const elasticsearchConf = require('co-config/es.js');
 const { expect } = require('chai');
