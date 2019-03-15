@@ -14,6 +14,7 @@ const CoSimilarity = {
 };
 
 CoSimilarity.doTheJob = function (docObject, next) {
+  if (!docObject.hasOwnProperty('idElasticsearch')) return next(new Error('idElasticsearch is missing'));
   const shingleString = getShingleString(docObject);
   const query = {
     'query': {
@@ -53,7 +54,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
     return elasticsearchClient.update({
       index: elasticsearchConf.index,
       type: Object.keys(mapping.mappings).pop(),
-      id: docObject.idConditor,
+      id: docObject.idElasticsearch,
       body: {
         doc: docObject
       }

@@ -40,6 +40,7 @@
     "creationDate": "2019-02-15 12:27:14",
     "viaf": [],
     "idConditor": "XA1ndKxxY4z_xr5wjaZzp0JxX",
+    "idElasticsearch": "XA1ndKxxY4z_xr5wjaZzp0JxX",
     "xissn": [
       "1769-7298"
     ],
@@ -126,6 +127,7 @@
     "creationDate": "2019-02-15 12:37:28",
     "viaf": [],
     "idConditor": "I4AnH8V9i0YVb9XoWbSlvfh_j",
+    "idElasticsearch": "I4AnH8V9i0YVb9XoWbSlvfh_j",
     "xissn": [],
     "sourceUid": "hal#hal-01421493",
     "issn": [],
@@ -220,6 +222,7 @@
     "creationDate": "2019-02-15 12:54:59",
     "viaf": [],
     "idConditor": "HXHT4r9y_THTaXSKdIb7NKBIO",
+    "idElasticsearch": "HXHT4r9y_THTaXSKdIb7NKBIO",
     "volume": "115",
     "xissn": [
       "1769-7298"
@@ -309,6 +312,7 @@
     "creationDate": "2019-02-15 12:38:27",
     "viaf": [],
     "idConditor": "FTZhbLHjIHJBfL5gans3JY279",
+    "idElasticsearch": "FTZhbLHjIHJBfL5gans3JY279",
     "xissn": [
       "0272-4979",
       "1464-3642"
@@ -399,6 +403,7 @@
     "creationDate": "2019-02-15 12:47:10",
     "viaf": [],
     "idConditor": "sAKzkBq0kPVT3elkAi_HwOIYJ",
+    "idElasticsearch": "sAKzkBq0kPVT3elkAi_HwOIYJ",
     "xissn": [
       "2104-3345"
     ],
@@ -467,6 +472,7 @@
     "creationDate": "2019-02-15 12:47:36",
     "viaf": [],
     "idConditor": "2L7iAguEzvpItydA80vRgAwVg",
+    "idElasticsearch": "2L7iAguEzvpItydA80vRgAwVg",
     "volume": "65",
     "xissn": [
       "0035-2764",
@@ -538,6 +544,7 @@
     "creationDate": "2019-02-15 12:38:33",
     "viaf": [],
     "idConditor": "zJ1RDh9jTevA9tlwEpvCl33u2",
+    "idElasticsearch": "zJ1RDh9jTevA9tlwEpvCl33u2",
     "xissn": [
       "0035-2764",
       "1950-6694"
