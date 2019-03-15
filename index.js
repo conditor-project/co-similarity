@@ -38,7 +38,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
     const duplicatedIdConditor = docObject.duplicates.map(duplicate => duplicate.idConditor);
     const nearDuplicates = result.hits.hits
       .slice(0, result.hits.hits.indexOf(recordWithMaxScoreDelta))
-      .filter(hit => (hit._source.idConditor !== docObject.idConditor && duplicatedIdConditor.includes(hit._source.idConditor)))
+      .filter(hit => (hit._source.idConditor !== docObject.idConditor && !duplicatedIdConditor.includes(hit._source.idConditor)))
       .map(hit => {
         const similarityRate = (result.hits.max_score === 0) ? 0 : _.round(hit._score / result.hits.max_score, 4);
         return {
