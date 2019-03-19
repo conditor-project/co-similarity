@@ -80,9 +80,13 @@ describe(`${pkg.name}/index.js`, function () {
 
   describe('getShingleString()', function () {
     it('should return a shingle string', function () {
-      const shingleString = coSimilarity.__get__('getShingleString')(testData[0]);
-      expect(shingleString).to.be.a('string');
-      expect(shingleString).to.equal("COMMENGES Hadrien PISTRE Pierre Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie M@ppemonde Longitudinal data are an important part of statistics in the social sciences. Demography has developed specific graphic visualization for these date but their use remains residual for the analysis of spatial dynamics. After a review of these graphic displays using a toy dataset, the paper proposes an original mode of visualization called 'slide plot' conceived to study trajectories of individuals or spatial units. Its use is illustrated with three examples: residential mobility, changes of modal choice in transportation, dynamics of spatial mismatch.");
+      testData.map(data => {
+        const shingleString = coSimilarity.__get__('getShingleString')(data);
+        expect(shingleString).to.be.a('string');
+        expect(shingleString.includes(data.title.default)).to.be.true;
+        expect(shingleString.includes(data.first3AuthorNames)).to.be.true;
+        if (data.hasOwnProperty('abstract')) expect(shingleString.includes(data.abstract)).to.be.true;
+      });
     });
   });
 });
