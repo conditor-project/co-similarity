@@ -52,7 +52,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
       })
       .filter(nearDuplicate => nearDuplicate.similarityRate > thresholdSimilarity);
     docObject.nearDuplicates = nearDuplicates;
-    docObject.isNearDuplicate = _.isEmpty(nearDuplicates);
+    docObject.isNearDuplicate = nearDuplicates.length > 0;
     return elasticsearchClient.update({
       index: elasticsearchConf.index,
       type: Object.keys(mapping.mappings).pop(),
