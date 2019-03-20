@@ -77,7 +77,3 @@ typings/
 
 # Visual Studio Code
 .vscode
-
-# Data Test
-test/dataset/in/data.json
-test/dataset/in/test.json

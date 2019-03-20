@@ -13,7 +13,6 @@ before_install:
   - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.3.deb && sudo dpkg -i --force-confnew elasticsearch-6.4.3.deb && sudo service elasticsearch start
   - sudo -E /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
   - sudo service elasticsearch restart
-install: ZIP_PASSWORD=${ZIP_PASSWORD} npm run install:travis
 notifications:
   email:
     recipients:
@@ -25,4 +24,3 @@ env:
   global:
     - CONDITOR_ES_HOSTS=localhost:9200
     - REVERSE_PROXY="0.0.0.0"
-    - secure: 9eLTYbRO6JZ0+QnO4AHZHElRT53xf/82rTXHh3LWgekR4eEKY2moTVhMkGJSQ5GsG3tYL34bmAu1g9Tvc7PeuDdzH62R+D33lgf5z9nt8mdAP4mza9wqEUeomcvm0cMXxJ2xro6cl/C4EqI+wJX+Q+Yx7V+Oa4K+bhJbay09SFxC0Ax23A6sL3GNtyZC61SOQQbHIgkElzhEcIFH0EM2wk5/AHOGUSXL7HzE2mwg/tIpgB8hsyv5An/F0O8IEYE2Cbw7jA8RnU5x/5GHwBpxb29Ph67q0JAt/vseHAkuPFpa1FRObIlAQZei5AATFFc1oaD/WueizvBdYVSGA/Px5SRA2FlHEaykv0/zdZ3ES+c176L7YKmQDHhXQeC2246nQK7r/JTAG/o4Mncu/O43l+2+jjJ/uafOKpA/vOJUi0Y4suXwxpJM1MIeL9RPGGE4l0tAYLWpA3+g+nzkxsQbSx4xmGyDeCxUu9jGaZSnKCwMCfBHIGLP1rliHoVj99AKFyKiQ6OfCz6AuODMb3x07zlTHAzaBxvzCSvCoXq/JtYPyZ3jNGB/vQeNjuZyZlF1+FIbNAtg/+3ruzByMx278rzkQbTTKOOmLAQGIeY+09P6UqXSMjs9cCN87y2b4qxsVezObXeUZbHxX+lYTx3T5MD0utbwo+nxOw6dFl4RhCc=

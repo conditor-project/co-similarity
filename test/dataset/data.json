@@ -1,0 +1,580 @@
+[
+  {
+    "hasDoi": false,
+    "sourceId": "hal-01244984",
+    "pageRange": "19p",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie",
+      "monography": "",
+      "journal": "M@ppemonde",
+      "en": "",
+      "fr": "Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/hal-01244984.xml",
+    "isni": [],
+    "idChain": "hal:XA1ndKxxY4z_xr5wjaZzp0JxX!",
+    "halAuthorId": [
+      "1262407",
+      "982589"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014-01-01",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "COMMENGES H PISTRE P",
+    "localRef": "DOC00023508",
+    "issue": "115",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "hal-01244984",
+    "eissn": [],
+    "abstract": "Longitudinal data are an important part of statistics in the social sciences. Demography has developed specific graphic visualization for these date but their use remains residual for the analysis of spatial dynamics. After a review of these graphic displays using a toy dataset, the paper proposes an original mode of visualization called 'slide plot' conceived to study trajectories of individuals or spatial units. Its use is illustrated with three examples: residential mobility, changes of modal choice in transportation, dynamics of spatial mismatch.",
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:27:14",
+    "viaf": [],
+    "idConditor": "XA1ndKxxY4z_xr5wjaZzp0JxX",
+    "idElasticsearch": "XA1ndKxxY4z_xr5wjaZzp0JxX",
+    "xissn": [
+      "1769-7298"
+    ],
+    "sourceUid": "hal#hal-01244984",
+    "issn": [
+      "1769-7298"
+    ],
+    "first3AuthorNames": "COMMENGES Hadrien PISTRE Pierre",
+    "authorNames": "COMMENGES Hadrien PISTRE Pierre",
+    "authors": [
+      {
+        "forename": "Hadrien",
+        "isni": [],
+        "surname": "COMMENGES",
+        "researcherId": "",
+        "halAuthorId": "1262407",
+        "affiliations": [
+          {
+            "ref": "#struct-43649",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      },
+      {
+        "forename": "Pierre",
+        "isni": [],
+        "surname": "PISTRE",
+        "researcherId": "",
+        "halAuthorId": "982589",
+        "affiliations": [
+          {
+            "ref": "#struct-222111",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": false,
+    "sourceId": "hal-01421493",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Beta type Stirling engine. Confrontation of Schmidt and finite physical dimensions thermodynamics methods to experiments",
+      "monography": "",
+      "journal": "Environmental Engineering and Management Journal",
+      "en": "Beta type Stirling engine. Confrontation of Schmidt and finite physical dimensions thermodynamics methods to experiments",
+      "fr": "",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/hal-01421493.xml",
+    "isni": [],
+    "idChain": "hal:I4AnH8V9i0YVb9XoWbSlvfh_j!",
+    "halAuthorId": [
+      "1438790",
+      "1250957",
+      "1438794"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Dobre C Grosu L Martaj N",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "hal-01421493",
+    "eissn": [],
+    "abstract": "no abstract",
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:37:28",
+    "viaf": [],
+    "idConditor": "I4AnH8V9i0YVb9XoWbSlvfh_j",
+    "idElasticsearch": "I4AnH8V9i0YVb9XoWbSlvfh_j",
+    "xissn": [],
+    "sourceUid": "hal#hal-01421493",
+    "issn": [],
+    "first3AuthorNames": "Dobre Cătălina Grosu Lavinia Martaj N.",
+    "authorNames": "Dobre Cătălina Grosu Lavinia Martaj N.",
+    "authors": [
+      {
+        "forename": "Cătălina",
+        "isni": [],
+        "surname": "Dobre",
+        "researcherId": "",
+        "halAuthorId": "1438790",
+        "affiliations": [
+          {
+            "ref": "#struct-233900",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      },
+      {
+        "forename": "Lavinia",
+        "isni": [],
+        "surname": "Grosu",
+        "researcherId": "",
+        "halAuthorId": "1250957",
+        "affiliations": [
+          {
+            "ref": "#struct-233900",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      },
+      {
+        "forename": "N.",
+        "isni": [],
+        "surname": "Martaj",
+        "researcherId": "",
+        "halAuthorId": "1438794",
+        "affiliations": [],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": false,
+    "sourceId": "halshs-01238371",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie",
+      "monography": "",
+      "journal": "M@ppemonde",
+      "en": "",
+      "fr": "Visualisation graphique agrégée des trajectoires individuelles : revue de l'existant et application en géographie",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/halshs-01238371.xml",
+    "isni": [],
+    "idChain": "hal:HXHT4r9y_THTaXSKdIb7NKBIO!",
+    "halAuthorId": [
+      "715079",
+      "982589"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Commenges H PISTRE P",
+    "issue": "3",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "halshs-01238371",
+    "eissn": [],
+    "abstract": "Longitudinal data are an important part of statistics in the social sciences. Demography has developed specific graphic visualization for these date but their use remains residual for the analysis of spatial dynamics. After a review of these graphic displays using a toy dataset, the paper proposes an original mode of visualization called \"slide plot\" conceived to study trajectories of individuals or spatial units. Its use is illustrated with three examples : residential mobility, changes of modal choice in transportation, dynamics of spatial mismatch.",
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:54:59",
+    "viaf": [],
+    "idConditor": "HXHT4r9y_THTaXSKdIb7NKBIO",
+    "idElasticsearch": "HXHT4r9y_THTaXSKdIb7NKBIO",
+    "volume": "115",
+    "xissn": [
+      "1769-7298"
+    ],
+    "sourceUid": "hal#halshs-01238371",
+    "issn": [
+      "1769-7298"
+    ],
+    "first3AuthorNames": "Commenges Hadrien PISTRE Pierre",
+    "authorNames": "Commenges Hadrien PISTRE Pierre",
+    "authors": [
+      {
+        "forename": "Hadrien",
+        "isni": [],
+        "surname": "Commenges",
+        "researcherId": "",
+        "halAuthorId": "715079",
+        "affiliations": [
+          {
+            "ref": "#struct-43649",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      },
+      {
+        "forename": "Pierre",
+        "isni": [],
+        "surname": "PISTRE",
+        "researcherId": "",
+        "halAuthorId": "982589",
+        "affiliations": [
+          {
+            "ref": "#struct-222111",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": false,
+    "sourceId": "hal-01437850",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [
+      "0000-0002-5954-9407"
+    ],
+    "source": "hal",
+    "title": {
+      "default": "A generalized plane-wave numerical method for smooth nonconstant coefficients",
+      "monography": "",
+      "journal": "IMA Journal of Numerical Analysis",
+      "en": "A generalized plane-wave numerical method for smooth nonconstant coefficients",
+      "fr": "",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/hal-01437850.xml",
+    "isni": [],
+    "idChain": "hal:FTZhbLHjIHJBfL5gans3JY279!",
+    "halAuthorId": [
+      "818058",
+      "736107"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Després B Imbert-Gérard L-M",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "hal-01437850",
+    "eissn": [
+      "1464-3642"
+    ],
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:38:27",
+    "viaf": [],
+    "idConditor": "FTZhbLHjIHJBfL5gans3JY279",
+    "idElasticsearch": "FTZhbLHjIHJBfL5gans3JY279",
+    "xissn": [
+      "0272-4979",
+      "1464-3642"
+    ],
+    "sourceUid": "hal#hal-01437850",
+    "issn": [
+      "0272-4979"
+    ],
+    "first3AuthorNames": "Després Bruno Imbert-Gérard Lise-Marie",
+    "authorNames": "Després Bruno Imbert-Gérard Lise-Marie",
+    "authors": [
+      {
+        "forename": "Bruno",
+        "isni": [],
+        "surname": "Després",
+        "researcherId": "",
+        "halAuthorId": "818058",
+        "affiliations": [
+          {
+            "ref": "#struct-25",
+            "address": ""
+          }
+        ],
+        "orcId": [
+          "0000-0002-5954-9407"
+        ],
+        "idHal": "11236",
+        "idRef": [],
+        "viaf": []
+      },
+      {
+        "forename": "Lise-Marie",
+        "isni": [],
+        "surname": "Imbert-Gérard",
+        "researcherId": "",
+        "halAuthorId": "736107",
+        "affiliations": [
+          {
+            "ref": "#struct-224472",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": false,
+    "sourceId": "halshs-00678936",
+    "pageRange": "5",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Bouvard et Pécuchet remontent le temps",
+      "monography": "",
+      "journal": "Revue Flaubert",
+      "en": "",
+      "fr": "Bouvard et Pécuchet remontent le temps",
+      "meeting": "colloque: \"Bouvard et Pécuchet : les \" seconds volumes \" possibles - Documentation, circulations, édition\", ENS de Lyon, dir. Stéphanie Dord-Crouslé"
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/halshs-00678936.xml",
+    "isni": [],
+    "idChain": "hal:sAKzkBq0kPVT3elkAi_HwOIYJ!",
+    "halAuthorId": [
+      "702629"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014-03-07",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Pierssens M",
+    "issue": "13 -­‐ \"Les dossiers documentaires de Bouvard et Pécuchet\": l'édition numérique du creuset flauberti",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "halshs-00678936",
+    "eissn": [
+      "2104-3345"
+    ],
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:47:10",
+    "viaf": [],
+    "idConditor": "sAKzkBq0kPVT3elkAi_HwOIYJ",
+    "idElasticsearch": "sAKzkBq0kPVT3elkAi_HwOIYJ",
+    "xissn": [
+      "2104-3345"
+    ],
+    "sourceUid": "hal#halshs-00678936",
+    "issn": [],
+    "first3AuthorNames": "Pierssens Michel",
+    "authorNames": "Pierssens Michel",
+    "authors": [
+      {
+        "forename": "Michel",
+        "isni": [],
+        "surname": "Pierssens",
+        "researcherId": "",
+        "halAuthorId": "702629",
+        "affiliations": [
+          {
+            "ref": "#struct-186915",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": false,
+    "sourceId": "halshs-00946709",
+    "pageRange": "pp. 537-566",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Stratégie familiale de gestion des chocs : l'offre de travail des épouses en réponse aux fermetures d'entreprise en Argentine",
+      "monography": "",
+      "journal": "Revue Economique",
+      "en": "",
+      "fr": "Stratégie familiale de gestion des chocs : l'offre de travail des épouses en réponse aux fermetures d'entreprise en Argentine",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/halshs-00946709.xml",
+    "isni": [],
+    "idChain": "hal:2L7iAguEzvpItydA80vRgAwVg!",
+    "halAuthorId": [
+      "883820"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Martinoty L",
+    "issue": "4",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "halshs-00946709",
+    "eissn": [
+      "1950-6694"
+    ],
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:47:36",
+    "viaf": [],
+    "idConditor": "2L7iAguEzvpItydA80vRgAwVg",
+    "idElasticsearch": "2L7iAguEzvpItydA80vRgAwVg",
+    "volume": "65",
+    "xissn": [
+      "0035-2764",
+      "1950-6694"
+    ],
+    "sourceUid": "hal#halshs-00946709",
+    "issn": [
+      "0035-2764"
+    ],
+    "first3AuthorNames": "Martinoty Laurine",
+    "authorNames": "Martinoty Laurine",
+    "authors": [
+      {
+        "forename": "Laurine",
+        "isni": [],
+        "surname": "Martinoty",
+        "researcherId": "",
+        "halAuthorId": "883820",
+        "affiliations": [
+          {
+            "ref": "#struct-102550",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "11790",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "_score": 1
+  },
+  {
+    "hasDoi": true,
+    "sourceId": "hal-01438369",
+    "documentType": [
+      "ART"
+    ],
+    "researcherId": [],
+    "isbn": [],
+    "orcId": [],
+    "source": "hal",
+    "title": {
+      "default": "Intrahousehold Shock Coping Strategy. The Labor Supply of Spouses in Response to Plant Closures in Argentina",
+      "monography": "",
+      "journal": "Revue Economique",
+      "en": "Intrahousehold Shock Coping Strategy. The Labor Supply of Spouses in Response to Plant Closures in Argentina",
+      "fr": "Stratégie familiale de gestion des chocs. L’offre de travail des épouses en réponse aux fermetures d’entreprises en Argentine",
+      "meeting": ""
+    },
+    "path": "/applis/conditor/home/input/hal/HAL_2019-02-15/FICHIERS_TEI/hal-01438369.xml",
+    "isni": [],
+    "idChain": "hal:zJ1RDh9jTevA9tlwEpvCl33u2!",
+    "halAuthorId": [
+      "1457152"
+    ],
+    "isDuplicate": false,
+    "publicationDate": "2014",
+    "duplicates": [],
+    "first3AuthorNamesWithInitials": "Martinoty L",
+    "sessionName": "HAL_2019-02-15",
+    "typeConditor": "Article",
+    "halId": "hal-01438369",
+    "eissn": [
+      "1950-6694"
+    ],
+    "abstract": "Insurance is one of the important economic functions of marriage. In an intra-household strategic perspective, this article sheds a new light on the labor supply of married women. The household life cycle model under uncertainty predicts that a shock on a breadwinner’s earnings has a positive impact on his spouse’s labor supply. This article relies on plant closure information to test for the added worker effect in Argentina using a difference-in-difference matching estimator. Strategic motives account for 12.5% of the overall increase in female labor market participation. A woman is 13 percentage points more likely to enter the labor market if her husband looses his job unexpectedly. Participation at the intensive margin is unchanged.",
+    "isDeduplicable": true,
+    "creationDate": "2019-02-15 12:38:33",
+    "viaf": [],
+    "idConditor": "zJ1RDh9jTevA9tlwEpvCl33u2",
+    "idElasticsearch": "zJ1RDh9jTevA9tlwEpvCl33u2",
+    "xissn": [
+      "0035-2764",
+      "1950-6694"
+    ],
+    "sourceUid": "hal#hal-01438369",
+    "issn": [
+      "0035-2764"
+    ],
+    "first3AuthorNames": "Martinoty Laurine",
+    "authorNames": "Martinoty Laurine",
+    "authors": [
+      {
+        "forename": "Laurine",
+        "isni": [],
+        "surname": "Martinoty",
+        "researcherId": "",
+        "halAuthorId": "1457152",
+        "affiliations": [
+          {
+            "ref": "#struct-102550",
+            "address": ""
+          }
+        ],
+        "orcId": [],
+        "idHal": "11790",
+        "idRef": [],
+        "viaf": []
+      }
+    ],
+    "doi": "10.3917/reco.654.0537",
+    "_score": 1
+  }
+]
