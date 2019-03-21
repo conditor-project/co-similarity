@@ -7,7 +7,7 @@ const elasticsearchConf = require('co-config/es.js');
 const elasticsearchClient = new elasticsearch.Client({
   host: elasticsearchConf.host
 });
-const thresholdSimilarity = 0.8;
+const thresholdSimilarity = 0.7;
 
 const CoSimilarity = {
   CONDITOR_SESSION: process.env.ISTEX_SESSION || 'TEST_1970-01-01-00-00-00',
@@ -33,14 +33,16 @@ CoSimilarity.doTheJob = function (docObject, next) {
     body: query,
     size: 50
   }).then(result => {
-    const recordWithMaxScoreDelta = result.hits.hits.map((hit, index, hits) => {
-      hit.scoreDelta = (index === 0) ? 0 : (hits[index - 1]._score - hit._score);
-      return hit;
-    }).sort((a, b) => a.scoreDelta - b.scoreDelta).pop();
-    const duplicatedIdConditor = docObject.duplicates.map(duplicate => duplicate.idConditor);
-    const nearDuplicates = result.hits.hits
+    const recordWithMaxScoreDelta = result.hits.hits
+      .map((hit, index, hits) => {
+        hit.scoreDelta = (index === 0) ? 0 : (hits[index - 1]._score - hit._score);
+        return hit;
+      })
+      .sort((a, b) => a.scoreDelta - b.scoreDelta)
+      .pop();
+    docObject.nearDuplicatesDetectedBySimilarity = result.hits.hits
       .slice(0, result.hits.hits.indexOf(recordWithMaxScoreDelta))
-      .filter(hit => (hit._source.idConditor !== docObject.idConditor && !duplicatedIdConditor.includes(hit._source.idConditor)))
+      .filter(hit => (hit._source.idConditor !== docObject.idConditor))
       .map(hit => {
         const similarityRate = (result.hits.max_score === 0) ? 0 : _.round(hit._score / result.hits.max_score, 4);
         return {
@@ -49,7 +51,10 @@ CoSimilarity.doTheJob = function (docObject, next) {
           type: docObject.typeConditor,
           source: hit._source.source
         };
-      })
+      });
+    const duplicatedIdConditor = docObject.duplicates.map(duplicate => duplicate.idConditor);
+    const nearDuplicates = docObject.nearDuplicatesDetectedBySimilarity
+      .filter(nearDuplicate => (!duplicatedIdConditor.includes(nearDuplicate.idConditor)))
       .filter(nearDuplicate => nearDuplicate.similarityRate > thresholdSimilarity);
     docObject.nearDuplicates = nearDuplicates;
     docObject.isNearDuplicate = nearDuplicates.length > 0;
