@@ -52,6 +52,7 @@ describe(`${pkg.name}/index.js`, function () {
           });
         }).then(result => {
           const doc = result._source;
+          expect(doc).to.have.property('nearDuplicatesDetectedBySimilarity');
           expect(doc).to.have.property('nearDuplicates');
           expect(doc.nearDuplicates).to.be.an('array');
           if (doc.nearDuplicates.length > 0) {
