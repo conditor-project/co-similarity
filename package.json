@@ -25,9 +25,9 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "bluebird": "^3.5.3",
+    "bluebird": "^3.5.4",
     "chai": "^4.2.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.1",
     "nyc": "^13.3.0",
     "rewire": "^4.0.1"
   }
