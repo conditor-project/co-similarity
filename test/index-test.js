@@ -59,7 +59,6 @@ describe(`${pkg.name}/index.js`, function () {
             doc.nearDuplicates.map(nearDuplicate => {
               expect(nearDuplicate).to.have.property('similarityRate');
               expect(nearDuplicate.similarityRate).to.be.a('number');
-              expect(nearDuplicate.similarityRate).to.be.above(coSimilarity.__get__('thresholdSimilarity'));
               expect(nearDuplicate).to.have.property('source');
               expect(nearDuplicate.source).to.be.a('string');
               expect(nearDuplicate).to.have.property('type');

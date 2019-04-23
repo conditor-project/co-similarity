@@ -7,7 +7,6 @@ const elasticsearchConf = require('co-config/es.js');
 const elasticsearchClient = new elasticsearch.Client({
   host: elasticsearchConf.host
 });
-const thresholdSimilarity = 0.7;
 
 const CoSimilarity = {
   CONDITOR_SESSION: process.env.ISTEX_SESSION || 'TEST_1970-01-01-00-00-00',
@@ -53,9 +52,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
         };
       });
     const duplicatedIdConditor = docObject.duplicates.map(duplicate => duplicate.idConditor);
-    const nearDuplicates = docObject.nearDuplicatesDetectedBySimilarity
-      .filter(nearDuplicate => (!duplicatedIdConditor.includes(nearDuplicate.idConditor)))
-      .filter(nearDuplicate => nearDuplicate.similarityRate > thresholdSimilarity);
+    const nearDuplicates = docObject.nearDuplicatesDetectedBySimilarity.filter(nearDuplicate => (!duplicatedIdConditor.includes(nearDuplicate.idConditor)));
     docObject.nearDuplicates = nearDuplicates;
     docObject.isNearDuplicate = nearDuplicates.length > 0;
     return elasticsearchClient.update({
