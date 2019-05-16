@@ -30,7 +30,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
   elasticsearchClient.search({
     index: elasticsearchConf.index,
     body: query,
-    size: 50
+    size: 200
   }).then(result => {
     const recordWithMaxScoreDelta = result.hits.hits
       .map((hit, index, hits) => {
