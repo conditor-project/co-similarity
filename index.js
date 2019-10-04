@@ -47,7 +47,7 @@ CoSimilarity.doTheJob = function (docObject, next) {
         return {
           similarityRate,
           idConditor: hit._source.idConditor,
-          type: docObject.typeConditor,
+          type: hit._source.typeConditor,
           source: hit._source.source
         };
       });
