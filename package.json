@@ -1,6 +1,6 @@
 {
   "name": "co-similarity",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Module permettant de rechercher et stocker des doublons incertains",
   "main": "index.js",
   "directories": {
