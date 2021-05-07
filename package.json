@@ -22,7 +22,7 @@
   "dependencies": {
     "co-config": "git+https://github.com/conditor-project/co-config.git",
     "elasticsearch": "^15.4.1",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "bluebird": "^3.5.4",
